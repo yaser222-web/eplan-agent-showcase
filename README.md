@@ -39,11 +39,9 @@ learns from a sample) and produces, without manual input:
 | ![fuse list](docs/img/fuse_list_controller_panel.png) | ![control logic](docs/img/control_logic_scenario.png) |
 | Fuse list of a generator-controller panel read through a **learned** drawing style — supply and consumer of every fuse, including the controller terminals it feeds | Control logic: what energises each relay, read from the wiring — e.g. `R01 = NOT ES1 AND UCB:3/4` |
 | ![patterns](docs/img/control_logic_patterns.png) | ![control review](docs/img/control_review.png) |
-| Patterns with evidence on three star-delta starters: self-hold, interlocks, emergency-stop chain | Control review of a 66-sheet MCC drawing (SOLIDWORKS Electrical) |
-| ![style learning](docs/img/style_learning_report.png) | ![SLD](docs/img/sld_house_style.png) |
-| Style-learning report: every learned value with its evidence | Single-line diagram in switchboard house style |
-| ![open wire](docs/img/finding_open_wire.png) | |
-| A finding: the wire stops 6.6 pt short of the contact pin — the coil circuit is open | |
+| Patterns with evidence on three star-delta starters: self-hold, interlocks, emergency-stop chain | Control-circuit review: verdict, findings by rule, every finding with page and column |
+| ![style learning](docs/img/style_learning_report.png) | |
+| Style-learning report: what the agent can produce with the learned style, and every learned value with its evidence | |
 
 ## Sample reports (PDF)
 
