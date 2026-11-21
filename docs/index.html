@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPLAN Fuse List Agent — showcase</title>
+<style>
+  body { font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif; margin: 0; color: #1a1f2b; background: #f6f8fa; }
+  header { background: #1f5f7a; color: #fff; padding: 36px 24px; }
+  header h1 { margin: 0 0 6px; font-size: 28px; }
+  header p { margin: 0; opacity: .9; max-width: 820px; }
+  main { max-width: 1040px; margin: 0 auto; padding: 24px; }
+  h2 { color: #1f5f7a; border-bottom: 2px solid #cfe0e8; padding-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .card { background: #fff; border: 1px solid #dde5ea; border-radius: 8px; padding: 14px; }
+  .card img { width: 100%; border: 1px solid #e5eaee; border-radius: 4px; }
+  .card p { font-size: 14px; color: #445; }
+  table { border-collapse: collapse; width: 100%; background: #fff; }
+  td, th { border-bottom: 1px solid #e1e8ee; padding: 8px; text-align: left; font-size: 14px; }
+  th { background: #1f5f7a; color: #fff; }
+  .cta { background: #fff4d6; border-left: 5px solid #c2410c; padding: 14px 18px; border-radius: 6px; }
+  footer { text-align: center; color: #667; font-size: 13px; padding: 24px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>EPLAN Fuse List Agent</h1>
+  <p>Reads vector PDF schematics of electrical panels (EPLAN P8, SOLIDWORKS Electrical, and new styles it learns
+     from a sample) and produces fuse lists, a 40-rule drawing review, a control-circuit review, the boolean logic of
+     every coil, power calculations, single-line diagrams and device labels — every finding traceable to a page and
+     column of the drawing. Runs fully offline.</p>
+</header>
+<main>
+  <h2>What it produces</h2>
+  <table>
+    <tr><th>Output</th><th>Content</th></tr>
+    <tr><td>Fuse list (PDF + Excel)</td><td>breaker / fuse, rating, consumer, supply path, phase</td></tr>
+    <tr><td>Drawing review</td><td>40 rules — IEC 60364, IEC 60898 / 60947, IEC 61082</td></tr>
+    <tr><td>Control-circuit review</td><td>coils, contacts, interlocks, open wires, cross-reference errors</td></tr>
+    <tr><td>Control-circuit logic</td><td>condition of every coil and lamp from the wiring, patterns with evidence, scenario per sheet</td></tr>
+    <tr><td>Power calculations</td><td>IEC 60909 short circuit, IEC 60364-4-41 fault loop, voltage drop, PF correction</td></tr>
+    <tr><td>Single-line diagram</td><td>per panel and per project, switchboard house style</td></tr>
+    <tr><td>Device labels</td><td>one label per device, ready to print</td></tr>
+  </table>
+
+  <h2>Examples</h2>
+  <div class="grid">
+    <div class="card"><img src="img/fuse_list_controller_panel.png" alt="fuse list">
+      <p>Fuse list of a generator-controller panel read through a learned drawing style — supply and consumer of every
+         fuse, including the controller terminals it feeds.</p></div>
+    <div class="card"><img src="img/control_logic_scenario.png" alt="control logic">
+      <p>Control logic read from the wiring: what energises each relay, e.g. R01 = NOT ES1 AND UCB:3/4.</p></div>
+    <div class="card"><img src="img/control_logic_patterns.png" alt="patterns">
+      <p>Patterns with evidence on three star-delta starters: self-hold, interlocks, emergency-stop chain.</p></div>
+    <div class="card"><img src="img/control_review.png" alt="control review">
+      <p>Control review of a 66-sheet MCC drawing made in SOLIDWORKS Electrical.</p></div>
+    <div class="card"><img src="img/finding_open_wire.png" alt="open wire">
+      <p>A finding: the wire stops 6.6 pt short of the contact pin — the coil circuit is open.</p></div>
+    <div class="card"><img src="img/style_learning_report.png" alt="style learning">
+      <p>Learning a new drawing style from one sample: each value with the evidence behind it.</p></div>
+    <div class="card"><img src="img/sld_house_style.png" alt="single line diagram">
+      <p>Single-line diagram generated from the schematic, in switchboard house style.</p></div>
+  </div>
+
+  <h2>Sample reports (PDF)</h2>
+  <table>
+    <tr><th>Report</th><th>File</th></tr>
+    <tr><td>Control-panel fuse list (learned drawing style)</td><td><a href="samples/sample_fuse_list_controller_panel.pdf">PDF</a></td></tr>
+    <tr><td>Control-circuit review</td><td><a href="samples/sample_control_review.pdf">PDF</a></td></tr>
+    <tr><td>Control-circuit logic — generator controller panel</td><td><a href="samples/sample_control_logic_controller_panel.pdf">PDF</a></td></tr>
+    <tr><td>Control-circuit logic — three star-delta starters</td><td><a href="samples/sample_control_logic_star_delta.pdf">PDF</a></td></tr>
+    <tr><td>Style-learning report</td><td><a href="samples/sample_style_learning_report.pdf">PDF</a></td></tr>
+  </table>
+
+  <h2>Try it on your drawing</h2>
+  <p class="cta">Send a vector PDF (not a scan). I run the agent offline on my own machine, return the outputs and
+     delete the drawing afterwards. An NDA is fine. Contact via the links on my GitHub profile.</p>
+</main>
+<footer>© All rights reserved — source code not published.</footer>
+</body>
+</html>
