@@ -55,14 +55,15 @@ learns from a sample) and produces, without manual input:
 
 ## Try it
 
-Send a vector PDF (not a scan) and I run the agent on it and return the outputs — usually within
-two working days. Drawings are processed offline on my own machine and deleted afterwards;
-an NDA is fine. Contact: see my GitHub profile / LinkedIn.
+Send a vector PDF (not a scan) to y59933210@gmail.com. I run the agent on it and return the
+outputs — usually within two working days. Drawings are processed offline on my own machine
+and deleted afterwards; an NDA is fine.
 
 ## Author
 
 Electrical design engineer (EPLAN P8, SOLIDWORKS Electrical, AutoCAD) — panel design, control
 circuits, generator and MV systems — building AI agents for electrical design review.
+[LinkedIn](https://www.linkedin.com/in/yaser-alizadeh-electrical-designer)
 
 ---
 © All rights reserved. The outputs shown here may not be reused without permission.
