@@ -1,4 +1,4 @@
-# EPLAN Fuse List Agent — showcase
+# Electrical Panel Analysis & Design Review Agent — showcase
 
 **An AI-assisted design-review agent for electrical panel drawings.**
 It reads vector PDF schematics (EPLAN Electric P8, SOLIDWORKS Electrical, and new drawing styles it
