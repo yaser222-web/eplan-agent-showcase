@@ -13,6 +13,9 @@ learns from a sample) and produces, without manual input:
 | Power calculations | short circuit (IEC 60909), fault loop (IEC 60364-4-41), voltage drop, PF correction |
 | Single-line diagram | per panel and per project, drawn in a switchboard house style |
 | Duct / device labels | one label per device, ready to print |
+| Connection list **(new)** | from → to wires, potential groups, terminals and CT secondaries, with a self-check |
+| Drawing vs approved design **(new)** | current, curve, poles, cable and breaking capacity, device by device |
+| Specification checklist **(new)** | customer requirements checked against what the drawing actually states |
 
 > The source code is not published. This repository shows what the agent does, with sample
 > outputs on anonymised drawings (names, codes and dates removed). To see it run on **your**
@@ -32,6 +35,23 @@ learns from a sample) and produces, without manual input:
    drawing; what cannot be decided with confidence is marked *operator must specify*. It runs
    fully offline. An optional local LLM only rewrites descriptions; it never decides a finding.
 
+## New: from the drawing to the shop floor
+
+Panel builders rarely lose time in design; they lose it between the drawing and the bench. Three checks
+address that:
+
+- **Connection list** — built only from the wiring drawn in the PDF. A wire with two ends is written
+  «from → to»; where three or more ends share a potential, the members are listed but no bridging order is
+  invented (a PDF does not carry it). Pins without a wire and duplicated terminal numbers are reported.
+- **Drawing vs approved design** — against the approved fuse list (Excel/PDF) or a simple schedule, after
+  normalising notation (C16 = 16A C; 4x10mm² = 4×10). A value the drawing does not state is
+  *operator must specify*, never a guessed mismatch.
+- **Specification checklist** — requirements as a short Excel checklist, each checked only against values
+  written on the drawing.
+
+Tested on 17 real drawings in two languages: existing outputs unchanged, repeated runs identical, deliberate
+changes to an approved schedule found exactly.
+
 ## Examples
 
 | | |
@@ -40,8 +60,10 @@ learns from a sample) and produces, without manual input:
 | Fuse list of a generator-controller panel read through a **learned** drawing style — supply and consumer of every fuse, including the controller terminals it feeds | Control logic: what energises each relay, read from the wiring — e.g. `R01 = NOT ES1 AND UCB:3/4` |
 | ![patterns](docs/img/control_logic_patterns.png) | ![control review](docs/img/control_review.png) |
 | Patterns with evidence on three star-delta starters: self-hold, interlocks, emergency-stop chain | Control-circuit review: verdict, findings by rule, every finding with page and column |
-| ![style learning](docs/img/style_learning_report.png) | |
-| Style-learning report: what the agent can produce with the learned style, and every learned value with its evidence | |
+| ![style learning](docs/img/style_learning_report.png) | ![connection list](docs/img/connection_list.png) |
+| Style-learning report: what the agent can produce with the learned style, and every learned value with its evidence | Connection list of a motor-control panel: point-to-point wires, potential groups, terminals |
+| ![approved design](docs/img/approved_design_check.png) | ![specification](docs/img/specification_check.png) |
+| Drawing vs approved design (demo schedule with deliberate changes) | Specification checklist: OK / not OK / operator must specify |
 
 ## Sample reports (PDF)
 
@@ -52,6 +74,9 @@ learns from a sample) and produces, without manual input:
 | Control-circuit logic — generator controller panel | [docs/samples/sample_control_logic_controller_panel.pdf](docs/samples/sample_control_logic_controller_panel.pdf) |
 | Control-circuit logic — three star-delta starters | [docs/samples/sample_control_logic_star_delta.pdf](docs/samples/sample_control_logic_star_delta.pdf) |
 | Style-learning report | [docs/samples/sample_style_learning_report.pdf](docs/samples/sample_style_learning_report.pdf) |
+| Connection list and terminals — motor-control panel | [docs/samples/sample_connection_list.pdf](docs/samples/sample_connection_list.pdf) |
+| Drawing vs approved design (demo schedule) | [docs/samples/sample_approved_design_check.pdf](docs/samples/sample_approved_design_check.pdf) |
+| Specification checklist (demo requirements) | [docs/samples/sample_specification_check.pdf](docs/samples/sample_specification_check.pdf) |
 
 ## Try it
 

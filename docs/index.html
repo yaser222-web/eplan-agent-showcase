@@ -28,6 +28,7 @@
   th { background: #1f5f7a; color: #fff; }
   .cta { background: #fff4d6; border-left: 5px solid #c2410c; padding: 14px 18px; border-radius: 6px; }
   footer { text-align: center; color: #667; font-size: 13px; padding: 24px; }
+  .new { background:#e0f2fe; color:#075985; font-size:11px; padding:1px 6px; border-radius:8px; margin-left:4px; }
 </style>
 </head>
 <body>
@@ -35,8 +36,9 @@
   <h1>Electrical Panel Analysis & Design Review Agent</h1>
   <p>Reads vector PDF schematics of electrical panels (EPLAN P8, SOLIDWORKS Electrical, and new styles it learns
      from a sample) and produces fuse lists, a 40-rule drawing review, a control-circuit review, the boolean logic of
-     every coil, power calculations, single-line diagrams and device labels — every finding traceable to a page and
-     column of the drawing. Runs fully offline.</p>
+     every coil, power calculations, single-line diagrams, device labels, connection lists and checks against the
+     approved design and the customer specification — every finding traceable to a page and column of the drawing.
+     Runs fully offline.</p>
 </header>
 <main>
   <h2>What it produces</h2>
@@ -49,7 +51,28 @@
     <tr><td>Power calculations</td><td>IEC 60909 short circuit, IEC 60364-4-41 fault loop, voltage drop, PF correction</td></tr>
     <tr><td>Single-line diagram</td><td>per panel and per project, switchboard house style</td></tr>
     <tr><td>Device labels</td><td>one label per device, ready to print</td></tr>
+    <tr><td>Connection list <span class="new">new</span></td><td>from → to wires, potential groups, terminals, CT secondaries — with a self-check</td></tr>
+    <tr><td>Drawing vs approved design <span class="new">new</span></td><td>current, curve, poles, cable, breaking capacity — device by device</td></tr>
+    <tr><td>Specification checklist <span class="new">new</span></td><td>customer requirements checked against what the drawing actually states</td></tr>
   </table>
+
+  <h2>New: from the drawing to the shop floor</h2>
+  <p>Panel builders rarely lose time in design; they lose it between the drawing and the bench — reading a
+     schematic connection by connection, building from a revision that is not the approved one, finding out
+     after assembly that the specification asked for something else. Three checks address exactly that:</p>
+  <ul>
+    <li><b>Connection list</b> — built only from the wiring drawn in the PDF. A wire with two ends is written
+        «from → to». Where three or more ends share a potential, the members are listed but no bridging order
+        is invented: a PDF does not carry it. Pins without a wire and terminal numbers used twice are reported.</li>
+    <li><b>Drawing vs approved design</b> — compare with the approved fuse list (Excel / PDF) or a simple
+        schedule. Notation is normalised first (C16 = 16A C; 4x10mm² = 4×10). A value the approved design gives
+        but the drawing does not state is <i>operator must specify</i>, never a guessed mismatch.</li>
+    <li><b>Specification checklist</b> — requirements entered as a short Excel checklist (main switch, poles,
+        incoming cable, spare ways, maximum outgoing rating, lighting curve, RCD for sockets, cable sections),
+        each checked only against values written on the drawing.</li>
+  </ul>
+  <p>Tested on 17 real drawings in two languages: the existing outputs stayed identical, repeated runs gave
+     identical results, and deliberate changes to an approved schedule produced exactly the expected findings.</p>
 
   <h2>Examples</h2>
   <div class="grid">
@@ -64,6 +87,14 @@
       <p>Control-circuit review: verdict, findings by rule, every finding with page and column.</p></div>
     <div class="card"><img src="img/style_learning_report.png" alt="style learning">
       <p>Learning a new drawing style from one sample: each value with the evidence behind it.</p></div>
+    <div class="card"><img src="img/connection_list.png" alt="connection list">
+      <p>Connection list of a motor-control panel: point-to-point wires, potential groups and terminals, with the
+         share of device pins that carry a wire.</p></div>
+    <div class="card"><img src="img/approved_design_check.png" alt="approved design check">
+      <p>Drawing vs approved design: a different trip curve, a missing and an extra device, another setting range
+         and cable — and one value the drawing does not state.</p></div>
+    <div class="card"><img src="img/specification_check.png" alt="specification check">
+      <p>Specification checklist: each requirement against the drawing — OK, not OK, or operator must specify.</p></div>
   </div>
 
   <h2>Sample reports (PDF)</h2>
@@ -74,6 +105,9 @@
     <tr><td>Control-circuit logic — generator controller panel</td><td><a href="samples/sample_control_logic_controller_panel.pdf">PDF</a></td></tr>
     <tr><td>Control-circuit logic — three star-delta starters</td><td><a href="samples/sample_control_logic_star_delta.pdf">PDF</a></td></tr>
     <tr><td>Style-learning report</td><td><a href="samples/sample_style_learning_report.pdf">PDF</a></td></tr>
+    <tr><td>Connection list and terminals — motor-control panel</td><td><a href="samples/sample_connection_list.pdf">PDF</a></td></tr>
+    <tr><td>Drawing vs approved design (demo schedule with deliberate changes)</td><td><a href="samples/sample_approved_design_check.pdf">PDF</a></td></tr>
+    <tr><td>Specification checklist (demo requirements)</td><td><a href="samples/sample_specification_check.pdf">PDF</a></td></tr>
   </table>
 
   <h2>Try it on your drawing</h2>
