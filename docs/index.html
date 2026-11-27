@@ -28,6 +28,9 @@
   th { background: #1f5f7a; color: #fff; }
   .cta { background: #fff4d6; border-left: 5px solid #c2410c; padding: 14px 18px; border-radius: 6px; }
   footer { text-align: center; color: #667; font-size: 13px; padding: 24px; }
+  .contact { margin-top: 14px; font-size: 15px; }
+  .contact a { color: #fff; background: rgba(255,255,255,.15); padding: 6px 12px; border-radius: 6px; text-decoration: none; margin-right: 8px; display: inline-block; }
+  .contact a:hover { background: rgba(255,255,255,.28); }
   .new { background:#e0f2fe; color:#075985; font-size:11px; padding:1px 6px; border-radius:8px; margin-left:4px; }
 </style>
 </head>
@@ -36,9 +39,11 @@
   <h1>Electrical Panel Analysis & Design Review Agent</h1>
   <p>Reads vector PDF schematics of electrical panels (EPLAN P8, SOLIDWORKS Electrical, and new styles it learns
      from a sample) and produces fuse lists, a 40-rule drawing review, a control-circuit review, the boolean logic of
-     every coil, power calculations, single-line diagrams, device labels, connection lists and checks against the
+     every coil, control- and power-circuit analysis, power calculations, single-line diagrams, device labels, connection lists and checks against the
      approved design and the customer specification — every finding traceable to a page and column of the drawing.
      Runs fully offline.</p>
+  <div class="contact">By Yaser Alizadeh, electrical design engineer —
+    <a href="https://www.linkedin.com/in/yaser-alizadeh-electrical-designer">LinkedIn</a><a href="mailto:y59933210@gmail.com">y59933210@gmail.com</a></div>
 </header>
 <main>
   <h2>What it produces</h2>
@@ -51,12 +56,32 @@
     <tr><td>Power calculations</td><td>IEC 60909 short circuit, IEC 60364-4-41 fault loop, voltage drop, PF correction</td></tr>
     <tr><td>Single-line diagram</td><td>per panel and per project, switchboard house style</td></tr>
     <tr><td>Device labels</td><td>one label per device, ready to print</td></tr>
-    <tr><td>Connection list <span class="new">new</span></td><td>from → to wires, potential groups, terminals, CT secondaries — with a self-check</td></tr>
-    <tr><td>Drawing vs approved design <span class="new">new</span></td><td>current, curve, poles, cable, breaking capacity — device by device</td></tr>
-    <tr><td>Specification checklist <span class="new">new</span></td><td>customer requirements checked against what the drawing actually states</td></tr>
+    <tr><td>Control-circuit analysis <span class="new">new</span></td><td>what the circuit is, how it works step by step, what is wrong and how to fix it — status box on page 1</td></tr>
+    <tr><td>Power-circuit analysis <span class="new">new</span></td><td>panel purpose with evidence, how power flows, breaker vs cable, protection, suggestions</td></tr>
+    <tr><td>Drawing vs approved design</td><td>current, curve, poles, cable, breaking capacity — device by device</td></tr>
+    <tr><td>Specification checklist</td><td>customer requirements checked against what the drawing actually states</td></tr>
   </table>
 
-  <h2>New: from the drawing to the shop floor</h2>
+  <h2>New: analysis reports for the senior engineer</h2>
+  <p>Each report opens with a <b>status box</b> — <i>Correction needed / Review needed / No serious problem found /
+     Incomplete analysis</i> — the findings by severity, the three most important ones, and how much of the drawing
+     was actually read. An incomplete reading is never reported as «no problem».</p>
+  <ul>
+    <li><b>Control-circuit analysis</b> — recognises the circuit (motor starters, generator / mains changeover, …)
+        with its evidence, simulates the relays and explains the sequence of operation with the contact that causes
+        every change. Findings include two contactors closing at the same time, a circuit that does not settle
+        (pumping), one-way interlocks and self-holds without a stop. Functions repeated on several starters are shown
+        once as a common block.</li>
+    <li><b>Power-circuit analysis</b> — states what the panel is (MCC, final distribution, distribution, capacitor
+        bank, changeover) only when the drawing gives enough evidence, then follows the power from the incomer to
+        every outgoing. Breaker rating against cable capacity for PVC and XLPE installation; breaking capacity only
+        where it is written; RCDs in series, sockets without RCD, surge arresters without earthing.</li>
+  </ul>
+  <p>Examples from the sample reports below: a 1600 A incomer fed by one 240 mm² cable (Iz ≈ 403 A PVC / 538 A XLPE —
+     at least 4×240 mm² needed); measuring devices whose neutral is not connected to the panel neutral; the star and
+     delta contactors able to close together; a star-delta interlock wired in one direction only.</p>
+
+  <h2>From the drawing to the shop floor</h2>
   <p>Panel builders rarely lose time in design; they lose it between the drawing and the bench — reading a
      schematic connection by connection, building from a revision that is not the approved one, finding out
      after assembly that the specification asked for something else. Three checks address exactly that:</p>
@@ -87,9 +112,18 @@
       <p>Control-circuit review: verdict, findings by rule, every finding with page and column.</p></div>
     <div class="card"><img src="img/style_learning_report.png" alt="style learning">
       <p>Learning a new drawing style from one sample: each value with the evidence behind it.</p></div>
-    <div class="card"><img src="img/connection_list.png" alt="connection list">
-      <p>Connection list of a motor-control panel: point-to-point wires, potential groups and terminals, with the
-         share of device pins that carry a wire.</p></div>
+    <div class="card"><img src="img/control_analysis.png" alt="control-circuit analysis">
+      <p><b>Control-circuit analysis</b> of three star-delta starters: status box, the circuit recognised with
+         evidence, and the fuses that feed it.</p></div>
+    <div class="card"><img src="img/power_analysis.png" alt="power-circuit analysis">
+      <p><b>Power-circuit analysis</b> of the same panel: MCC identified with evidence; incomer breaker above the
+         incoming cable capacity.</p></div>
+    <div class="card"><img src="img/control_analysis_findings.png" alt="control-circuit analysis findings">
+      <p>Control-circuit analysis — findings: a one-way star-delta interlock and a circuit that pumps, each with the
+         cause, the location and the fix.</p></div>
+    <div class="card"><img src="img/power_analysis_findings.png" alt="power-circuit analysis findings">
+      <p>Power-circuit analysis of a 1600 A distribution board — findings: incomer breaker vs cable, neutral of the
+         meters not connected.</p></div>
     <div class="card"><img src="img/approved_design_check.png" alt="approved design check">
       <p>Drawing vs approved design: a different trip curve, a missing and an extra device, another setting range
          and cable — and one value the drawing does not state.</p></div>
@@ -105,13 +139,17 @@
     <tr><td>Control-circuit logic — generator controller panel</td><td><a href="samples/sample_control_logic_controller_panel.pdf">PDF</a></td></tr>
     <tr><td>Control-circuit logic — three star-delta starters</td><td><a href="samples/sample_control_logic_star_delta.pdf">PDF</a></td></tr>
     <tr><td>Style-learning report</td><td><a href="samples/sample_style_learning_report.pdf">PDF</a></td></tr>
-    <tr><td>Connection list and terminals — motor-control panel</td><td><a href="samples/sample_connection_list.pdf">PDF</a></td></tr>
+    <tr><td><b>Control-circuit analysis — three star-delta starters</b></td><td><a href="samples/sample_control_analysis_star_delta.pdf">PDF</a></td></tr>
+    <tr><td><b>Control-circuit analysis — generator / mains changeover</b></td><td><a href="samples/sample_control_analysis_controller_panel.pdf">PDF</a></td></tr>
+    <tr><td><b>Power-circuit analysis — motor-control centre</b></td><td><a href="samples/sample_power_analysis_mcc.pdf">PDF</a></td></tr>
+    <tr><td><b>Power-circuit analysis — 1600 A distribution board</b></td><td><a href="samples/sample_power_analysis_distribution.pdf">PDF</a></td></tr>
     <tr><td>Drawing vs approved design (demo schedule with deliberate changes)</td><td><a href="samples/sample_approved_design_check.pdf">PDF</a></td></tr>
     <tr><td>Specification checklist (demo requirements)</td><td><a href="samples/sample_specification_check.pdf">PDF</a></td></tr>
   </table>
 
   <h2>Try it on your drawing</h2>
-  <p class="cta">Send a vector PDF (not a scan) to <a href="mailto:y59933210@gmail.com">y59933210@gmail.com</a>.
+  <p class="cta">Send a vector PDF (not a scan) to <a href="mailto:y59933210@gmail.com">y59933210@gmail.com</a>,
+     or write to me on <a href="https://www.linkedin.com/in/yaser-alizadeh-electrical-designer">LinkedIn</a>.
      I run the agent offline on my own machine, return the outputs and delete the drawing afterwards.
      An NDA is fine.</p>
 
